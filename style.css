@@ -1,0 +1,25 @@
+body
+{
+    min-width: 800px;
+    background-color: #36454F;
+    margin: 0;
+}
+.logo
+{
+    background-color: #F88379;
+    width: 100%;
+    height: 5vh;
+    position: sticky;
+}
+#login
+{
+    background-color: #FBE5C0;
+    float: right;
+    border-radius: 4px;
+    margin: 5px;
+    width: 7.5vw;
+    height: 80%;
+
+    vertical-align: center;
+    text-align: center;
+}
