@@ -31,6 +31,13 @@ form
     max-width: 400px;
     margin-bottom: 50px; /* Space between the logo and search box */
 }
+@media (width <= 600)
+{
+    .logo
+    {
+        width: 200px;
+    }
+}
 .search
 {
     --padding: 14px;
@@ -57,7 +64,7 @@ form
     outline: none;
     border: none;
     background: transparent;
-    width: 350px;
+    width: 300px;
 }
 
 .search-input::placeholder,
