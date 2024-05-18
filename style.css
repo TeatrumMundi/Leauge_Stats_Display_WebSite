@@ -1,25 +1,60 @@
+*
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body
 {
-    min-width: 800px;
-    background-color: #36454F;
-    margin: 0;
+    font-family: Arial, sans-serif;
 }
+
+.top-bar
+{
+    background-color: #75E6DA;
+    color: #05445E;
+
+    height: 6vh;
+    min-height: 40px;
+    text-align: left;
+    vertical-align: center;
+}
+
 .logo
 {
-    background-color: #F88379;
-    width: 100%;
-    height: 5vh;
-    position: sticky;
+    font-size: 16px;
+    width: 20%;
+    max-width: 1200px;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    float: left;
 }
-#login
+.logo img
 {
-    background-color: #FBE5C0;
-    float: right;
-    border-radius: 4px;
-    margin: 5px;
-    width: 7.5vw;
-    height: 80%;
+    height: 6vh;
+    min-height: 40px;
+}
 
-    vertical-align: center;
-    text-align: center;
+.login
+{
+    display: flex;
+    justify-content: flex-end; /* Wyśrodkowanie w poziomie na prawo */
+    align-items: center; /* Wyśrodkowanie w pionie */
+    padding-right: 20px; /* Dodaj trochę paddingu, aby guzik nie dotykał prawej krawędzi ekranu */
+
+    height: 6vh;
+    width: 80%;
+    float: left;
+    text-align: right;
+}
+.login button
+{
+    background-color: #05445E; /* Dark background color */
+    color: white; /* White text */
+    border: none; /* No border */
+    padding: 10px 20px; /* Padding inside the button */
+    border-radius: 4px; /* Rounded corners */
+    font-size: 14px; /* Font size */
 }

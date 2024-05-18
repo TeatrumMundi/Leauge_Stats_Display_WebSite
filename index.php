@@ -6,19 +6,21 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="style.css">
     </head>
+
     <body>
-        <div class="logo">
-            aaa
-            <div id="login">
-                <p>Login</p>
+        <header class="top-bar">
+            <div class="logo">
+                <a href=index.php>
+                    <img src="IMG/League-logo.png" alt="LOGO">
+                </a>
             </div>
-        </div>
-        <div id="Menu">
+            <div class="login">
+                <button class="login-button">Zaloguj się</button>
+            </div>
+        </header>
 
-        </div>
-        <div id="Main">
 
-        </div>
+
     </body>
 
 </html>
