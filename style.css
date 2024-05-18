@@ -2,59 +2,83 @@
 {
     margin: 0;
     padding: 0;
+    font-family: 'Poppins', sans-serif;
     box-sizing: border-box;
 }
-
-body
+.container
 {
-    font-family: Arial, sans-serif;
-}
+    width: 100%;
+    min-height: 100vh;
+    background-image: linear-gradient(rgba(9, 0, 77, 0.65), rgba(9, 0, 77, 0.65)), url("IMG/kayle-bg.jpg");
+    background-size: cover;
+    background-position: center;
+    padding: 10px 8%;
 
-.top-bar
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+form
 {
-    background-color: #75E6DA;
-    color: #05445E;
-
-    height: 6vh;
-    min-height: 40px;
-    text-align: left;
-    vertical-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
-
 .logo
 {
-    font-size: 16px;
-    width: 20%;
-    max-width: 1200px;
+    max-width: 400px;
+    margin-bottom: 50px; /* Space between the logo and search box */
+}
+.search
+{
+    --padding: 14px;
+
+    width: max-content;
     display: flex;
     align-items: center;
-    padding: 0 20px;
-    float: left;
+    padding: var(--padding);
+    border-radius: 28px;
+    background: #fff; /* Color of the search box */
+    transition: box-shadow 0.25s;
 }
-.logo img
+.search:focus-within
 {
-    height: 6vh;
-    min-height: 40px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.75);
+}
+.search input
+{
+    font-size: 16px;
+    font-family: Roboto, serif;
+    font-weight: 700;
+    color: #333333;
+    margin-left: var(--padding);
+    outline: none;
+    border: none;
+    background: transparent;
+    width: 350px;
 }
 
-.login
+.search-input::placeholder,
+.search-icon
 {
-    display: flex;
-    justify-content: flex-end; /* Wyśrodkowanie w poziomie na prawo */
-    align-items: center; /* Wyśrodkowanie w pionie */
-    padding-right: 20px; /* Dodaj trochę paddingu, aby guzik nie dotykał prawej krawędzi ekranu */
-
-    height: 6vh;
-    width: 80%;
-    float: left;
-    text-align: right;
+    color: rgba(0, 0, 0, 0.25);
 }
-.login button
+
+.footer
 {
-    background-color: #05445E; /* Dark background color */
-    color: white; /* White text */
-    border: none; /* No border */
-    padding: 10px 20px; /* Padding inside the button */
-    border-radius: 4px; /* Rounded corners */
-    font-size: 14px; /* Font size */
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    font-size: 8px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+.footer-link
+{
+    color: inherit; /* Make link inherit color from parent */
+    text-decoration: none; /* Remove underline */
 }
