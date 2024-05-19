@@ -26,7 +26,5 @@
 </div>
 <div class="footer">© Designed by <a href="https://github.com/TeatrumMundi" class="footer-link">TeatrumMundi</a></div>
 
-
-
 </body>
 </html>

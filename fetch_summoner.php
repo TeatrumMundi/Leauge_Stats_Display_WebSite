@@ -6,39 +6,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     $name = rawurlencode($name);
     $tag = rawurlencode($tag);
 
-    $apiKey = 'place-holder'; //  Riot Games API key
+    $apiKey = 'RGAPI-0cc8a946-ba54-4a2e-bb75-043e9c8c5c3e'; //  Riot Games API key
     $region = 'europe'; // Change this to the appropriate region
 
-    if (empty($summonerName))
-    {
-        echo "Please enter a summoner name.";
-        exit;
-    }
+    require_once 'API_Calls.php';
+    $API_Connection = new API_Calls();
+    $data = $API_Connection->Account_V1($region, $name, $tag, $apiKey);
+    $data_summoner_v4 = $API_Connection->Summoner_V4($data['puuid'], $apiKey);
 
-    $url = "https://$region.api.riotgames.com/riot/account/v1/accounts/by-riot-id/$name/$tag?api_key=$apiKey";
-
-    $ch = curl_init($url);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
-
-    $response = curl_exec($ch);
-
-    if (curl_errno($ch))
-    {
-        echo "Failed to fetch account information. Please try again. Error: " . curl_error($ch);
-        curl_close($ch);
-        exit;
-    }
-
-    curl_close($ch);
-
-    $data = json_decode($response, true);
+    echo
+    "
+        <h2>Account Information</h2>
+        <p>Summoner PUUID: {$data_summoner_v4['profileIconId']}</p>
+        <p>Summoner Name: {$data_summoner_v4['revisionDate']}</p>
+        <p>Summoner TagLine: {$data_summoner_v4['summonerLevel']}</p>
+        <img src='profileicon/{$data_summoner_v4['profileIconId']}.png' alt='Obrazek' />
+    ";
 }
 ?>
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <title>League of Legends - Match History</title>
+    <title><?php echo $data['gameName'] . " - Profile"; ?></title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="style-info.css">
