@@ -6,7 +6,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     $name = rawurlencode($name);
     $tag = rawurlencode($tag);
 
-    $apiKey = 'RGAPI-0cc8a946-ba54-4a2e-bb75-043e9c8c5c3e'; //  Riot Games API key
+    $apiKey = 'place-holder'; //  Riot Games API key
     $region = 'europe'; // Change this to the appropriate region
 
     if (empty($summonerName))
