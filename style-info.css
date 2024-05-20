@@ -2,7 +2,7 @@
 {
     margin: 0;
     padding: 0;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Roboto', sans-serif;
     box-sizing: border-box;
 }
 .container
@@ -13,10 +13,59 @@
     background-size: cover;
     background-position: center;
     padding: 10px 8%;
-
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+}
+
+.top-right-container
+{
+    position: absolute;
+    top: 30px; /*  Summoner icon and nick distance from top */
+    left: 40px; /* Summoner icon and nick distance from left */
+    display: flex;
+    align-items: flex-start;
+}
+
+.summoner-icon-container /* Summoner Icon + Level Container */
+{
+    position: relative;
+    display: inline-block;
+    border-radius: 10%;
+    overflow: hidden;
+    width: 250px;
+    height: 250px;
+}
+.summoner-icon /* Summoner Icon */
+{
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 10%;
+}
+.summoner-lvl
+{
+    position: absolute;
+    bottom: 0;
+    left:0;
+    transform: none;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 5px;
+    text-align: center;
+    font-size: 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+.summoner-name-container
+{
+    margin-left: 10px; /* IMG distance */
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    border-radius: 7px;
+    font-size: 28px;
 }
 .footer
 {
@@ -35,7 +84,3 @@
     text-decoration: none; /* Remove underline */
 }
 
-p
-{
-    color: white;
-}

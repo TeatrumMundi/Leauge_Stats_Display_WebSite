@@ -24,12 +24,14 @@ class API_Calls
     }
     public function Account_V1($region, $name, $tag, $apiKey) // Returns PUUID, TAG, GameName
     {
+        $name = trim($name); // Delete whit signs
+        $name = str_replace(' ', '%20', $name); // Replace space with %20
         $url = "https://$region.api.riotgames.com/riot/account/v1/accounts/by-riot-id/$name/$tag?api_key=$apiKey";
-        return $data = json_decode($this->curl($url), true);
+        return json_decode($this->curl($url), true);
     }
     public function Summoner_V4($puuid, $apiKey)
     {
         $url = "https://eun1.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/$puuid?api_key=$apiKey";
-        return $data = json_decode($this->curl($url), true); // PUUID, TAG, GameName
+        return json_decode($this->curl($url), true); // PUUID, TAG, GameName
     }
 }

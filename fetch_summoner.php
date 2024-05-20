@@ -1,31 +1,18 @@
 <?php /** @noinspection ALL */
 if ($_SERVER["REQUEST_METHOD"] == "POST")
 {
-    $summonerName = htmlspecialchars($_POST['summonerName']); // Get summoner name from the user
-    list($name, $tag) = explode('#', $summonerName); // Split name and tag
-    $name = rawurlencode($name);
-    $tag = rawurlencode($tag);
-
-    $apiKey = 'RGAPI-0cc8a946-ba54-4a2e-bb75-043e9c8c5c3e'; //  Riot Games API key
+    $name = htmlspecialchars($_POST['summonerName']); // Get summoner name from the user
+    $tag = htmlspecialchars($_POST['summonerTag']); // Get tag from the user
+    $apiKey = 'RGAPI-2795daa5-09f9-4e82-a6e3-f68be8b03ef6'; //  Riot Games API key
     $region = 'europe'; // Change this to the appropriate region
 
     require_once 'API_Calls.php';
     $API_Connection = new API_Calls();
-    $data = $API_Connection->Account_V1($region, $name, $tag, $apiKey);
-    $data_summoner_v4 = $API_Connection->Summoner_V4($data['puuid'], $apiKey);
-
-    echo
-    "
-        <h2>Account Information</h2>
-        <p>Summoner PUUID: {$data_summoner_v4['profileIconId']}</p>
-        <p>Summoner Name: {$data_summoner_v4['revisionDate']}</p>
-        <p>Summoner TagLine: {$data_summoner_v4['summonerLevel']}</p>
-        <img src='profileicon/{$data_summoner_v4['profileIconId']}.png' alt='Obrazek' />
-    ";
-}
-?>
+    $data = $API_Connection->Account_V1($region, $name, $tag, $apiKey); // return values puuid, gameName,tagLine
+    $data_summoner_v4 = $API_Connection->Summoner_V4($data['puuid'], $apiKey); // return values profileIconId, revisionDate, summonerLevel, profileIconId
+} ?>
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
 <head>
     <title><?php echo $data['gameName'] . " - Profile"; ?></title>
     <meta charset="UTF-8">
@@ -43,16 +30,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     <?php
     echo
     "
-        <h2>Account Information</h2>
-        <p>Summoner PUUID: {$data['puuid']}</p>
-        <p>Summoner Name: {$data['gameName']}</p>
-        <p>Summoner TagLine: {$data['tagLine']}</p>
+        <div class='top-right-container'>
+            <div class='summoner-icon-container'>
+                <img class='summoner-icon' src='profileicon/{$data_summoner_v4['profileIconId']}.png' alt='summoner profile image'>
+                <div class='summoner-lvl'>{$data_summoner_v4['summonerLevel']}</div>
+            </div>
+            <div class='summoner-name-container'>{$data['gameName']}#{$data['tagLine']}</div>
+        </div>
     ";
     ?>
 </div>
+
 <div class="footer">© Designed by <a href="https://github.com/TeatrumMundi" class="footer-link">TeatrumMundi</a></div>
-
-
-
 </body>
 
