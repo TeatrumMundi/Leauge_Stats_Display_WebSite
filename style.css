@@ -65,17 +65,20 @@ form
 {
     font-size: 16px;
     font-weight: 700;
+    text-transform: uppercase;
     color: #333333;
     margin-left: var(--padding);
     outline: none;
     border: none;
     background: transparent;
-    width: 150px;
+    width: 100px;
+
+    box-shadow: none;
 }
 
 .search-input#name-input
 {
-    width: 200px;
+    width: 150px;
 }
 
 .search-input#tag-input
@@ -92,18 +95,21 @@ form
 {
     font-size: 16px;
     font-weight: 700;
-    color: #333333;
+    color: rgba(0, 0, 0, 0.25);
     margin-left: 0;
     outline: none;
     border: none;
     background: transparent;
     appearance: none;
     border-radius: 5px; /* Match the search box radius */
-    color: rgba(0, 0, 0, 0.25); /* Placeholder color */
-    width: 14em;
+    width: 10em;
 }
-.search-button
+.search-select:focus,
+.selected-option
 {
+    color: #333333;
+}
+.search-button { /* Search button properties */
     background: transparent;
     border: none;
     color: rgba(0, 0, 0, 0.25); /* Match the placeholder color */
@@ -112,9 +118,7 @@ form
     font-weight: 700;
     margin-left: auto; /* Move the button to the right */
 }
-
-.footer
-{
+.footer {
     position: absolute;
     bottom: 10px;
     left: 10px;
@@ -124,9 +128,7 @@ form
     padding: 5px 10px;
     border-radius: 5px;
 }
-
-.footer-link
-{
+.footer-link {
     color: inherit; /* Make link inherit color from parent */
     text-decoration: none; /* Remove underline */
 }
