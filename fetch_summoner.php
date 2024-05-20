@@ -4,7 +4,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     $name = htmlspecialchars($_POST['summonerName']); // Get player nick
     $tag = htmlspecialchars($_POST['summonerTag']); // Get player tag
     $server = htmlspecialchars($_POST['region']); // Get player region
-    $apiKey = 'RGAPI-2795daa5-09f9-4e82-a6e3-f68be8b03ef6'; //  Riot Games API key
+    $apiKey = 'RGAPI-ca1871bf-745b-492f-8bd9-2a57cbe84914'; //  Riot Games API key
 
     require_once 'API_Calls.php';
     $API_Connection = new API_Calls();
@@ -23,6 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style_info_search_box.css"
 </head>
 
 <body>
