@@ -23,24 +23,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style_info_search_box.css"
+    <link rel="stylesheet" href="style_info_search_box.css">
 </head>
 
 <body>
 
 <div class="container">
-    <?php
-    echo
-    "
-        <div class='top-right-container'>
-            <div class='summoner-icon-container'>
-                <img class='summoner-icon' src='profileicon/{$data_summoner_v4['profileIconId']}.png' alt='summoner profile image'>
-                <div class='summoner-lvl'>{$data_summoner_v4['summonerLevel']}</div>
-            </div>
-            <div class='summoner-name-container'>{$data['gameName']}#{$data['tagLine']}</div>
-        </div>
-    ";
-    ?>
     <form id="search-form" action="fetch_summoner.php" method="POST">
         <div class="search">
             <span class="search-icon material-symbols-outlined">search</span>
@@ -77,10 +65,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
             <input class="search-button" type="submit" value="Search" />
         </div>
     </form>
+    <?php
+    echo
+    "
+        <div class='top-right-container'>
+            <div class='summoner-icon-container'>
+                <img class='summoner-icon' src='profileicon/{$data_summoner_v4['profileIconId']}.png' alt='summoner profile image'>
+                <div class='summoner-lvl'>{$data_summoner_v4['summonerLevel']}</div>
+            </div>
+            <div class='summoner-name-container'>{$data['gameName']}#{$data['tagLine']}</div>
+        </div>
+    ";
+    ?>
 </div>
-
-
 <div class="footer">© Designed by <a href="https://github.com/TeatrumMundi" class="footer-link">TeatrumMundi</a></div>
+<div class="container"></div>
 <script src="select_color.js"></script>
 </body>
 
