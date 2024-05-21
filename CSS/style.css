@@ -9,7 +9,7 @@
 {
     width: 100%;
     min-height: 100vh;
-    background-image: linear-gradient(rgba(9, 0, 77, 0.65), rgba(9, 0, 77, 0.65)), url("IMG/kayle-bg.jpg");
+    background-image: linear-gradient(rgba(9, 0, 77, 0.65), rgba(9, 0, 77, 0.65)), url("../IMG/kayle-bg.jpg");
     background-size: cover;
     background-position: center;
     padding: 10px 8%;
@@ -118,8 +118,11 @@ form
     font-weight: 700;
     margin-left: auto; /* Move the button to the right */
 }
+.search-button:hover{
+    color: #333;
+}
 .footer {
-    position: absolute;
+    position: fixed;
     bottom: 10px;
     left: 10px;
     font-size: 8px;

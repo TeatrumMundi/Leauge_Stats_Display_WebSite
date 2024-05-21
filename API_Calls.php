@@ -52,4 +52,31 @@ class API_Calls
         $url = "https://$server.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/$puuid?api_key=$apiKey";
         return json_decode($this->curl($url), true); // PUUID, TAG, GameName
     }
+    public function CHAMPION_MASTERY_V4_TOP($puuid, $apiKey, $server)
+    {
+        $url = "https://$server.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-puuid/$puuid/top?count=1&api_key=$apiKey";
+        return json_decode($this->curl($url), true); // PUUID, TAG, GameName
+    }
+    public function getChampionNameById($championId, $game_version)
+    {
+        $filePath = str_replace("version", $game_version, 'dragontail-version\version\data\en_US\champion.json');
+        //Check if file exist
+        if (!file_exists($filePath)) {
+            die("File $filePath do not exist.");
+        }
+        // Loading and decoding JSON file
+        $json = file_get_contents($filePath);
+        $championsData = json_decode($json, true);
+        // Checking decoding success
+        if ($championsData === null) {
+            die("Failed to decode $filePath.");
+        }
+        // Creating ID map to champion ID
+        $championIdToName = [];
+        foreach ($championsData['data'] as $value) {
+            $championIdToName[intval($value['key'])] = $value['name'];
+        }
+        // Return champion id
+        return isset($championIdToName[$championId]) ? $championIdToName[$championId] : "Unknown championId";
+    }
 }
