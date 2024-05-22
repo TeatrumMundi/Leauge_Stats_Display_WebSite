@@ -19,6 +19,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     $top_acc_mastery_name_2 = $API_Connection->getChampionNameById($top_champion_id[1]['championId'], $game_version);
     $top_acc_mastery_name_3 = $API_Connection->getChampionNameById($top_champion_id[2]['championId'], $game_version);
     $random_bg_number = $API_Connection ->getChampionSkinCount($top_acc_mastery_name_1, $game_version);
+    $match_history_IDs = $API_Connection->MATCH_V5_BY_PUUID($data['puuid'], $apiKey, $region, 20);
+    $match_details = $API_Connection->MATCH_V5_BY_ID($data['puuid'], $apiKey, $region ,$match_history_IDs[0]);
     $random_bg = '../dragontail-' . $game_version . '/img/champion/splash/' . $top_acc_mastery_name_1 . '_' . $random_bg_number . '.jpg';
 } ?>
 <!DOCTYPE html>

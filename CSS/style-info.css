@@ -11,7 +11,7 @@
     min-width: 650px;
     padding-top: 30px;
     background-size: cover;
-    background-position: center;
+    background-position: top;
 }
 .top-right-container {
     position: absolute;

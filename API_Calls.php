@@ -57,6 +57,16 @@ class API_Calls
         $url = "https://$server.api.riotgames.com/lol/champion-mastery/v4/champion-masteries/by-puuid/$puuid/top?count=$number&api_key=$apiKey";
         return json_decode($this->curl($url), true); // PUUID, TAG, GameName
     }
+    public function MATCH_V5_BY_PUUID($puuid, $apiKey, $region, $count)
+    {
+        $url = "https://$region.api.riotgames.com/lol/match/v5/matches/by-puuid/$puuid/ids?start=0&count=$count&api_key=$apiKey";
+        return json_decode($this->curl($url), true); // Games IDs
+    }
+    public function MATCH_V5_BY_ID($puuid, $apiKey, $region, $match_ID)
+    {
+        $url = "https://$region.api.riotgames.com/lol/match/v5/matches/$match_ID?api_key=$apiKey";
+        return json_decode($this->curl($url), true);
+    }
     public function getChampionNameById($championId, $game_version)
     {
         $filePath = str_replace("version", $game_version, 'dragontail-version\version\data\en_US\champion.json');
