@@ -1,28 +1,38 @@
 <?php /** @noinspection ALL */
 if ($_SERVER["REQUEST_METHOD"] == "POST")
 {
-    $game_version = '14.10.1';
-
-
-    $name = htmlspecialchars($_POST['summonerName']); // Get player nick
-    $tag = htmlspecialchars($_POST['summonerTag']); // Get player tag
-    $server = htmlspecialchars($_POST['region']); // Get player region
-    $apiKey = 'RGAPI-bf199cbf-7e78-4883-aeee-44eb01b256b7'; //  Riot Games API key
+    $config = parse_ini_file('config.ini');
+    $game_version = $config['gameVersion'];
+    $apiKey = $config['apiKey']; //  Riot Games API key
+    $summoner_Nick = htmlspecialchars($_POST['summonerName'], ENT_QUOTES, 'UTF-8'); // Get player nick
+    $tag = htmlspecialchars($_POST['summonerTag'], ENT_QUOTES, 'UTF-8');
+    $server = htmlspecialchars($_POST['region'], ENT_QUOTES, 'UTF-8');
 
     require_once 'API_Calls.php';
     $API_Connection = new API_Calls();
-    $region = $API_Connection->Region_Select($server); // return region based on server
-    $data = $API_Connection->Account_V1($region, $name, $tag, $apiKey); // return values puuid, gameName,tagLine
-    $data_summoner_v4 = $API_Connection->Summoner_V4($data['puuid'], $apiKey, $server); // return values profileIconId, revisionDate, summonerLevel, profileIconId
-    $top_champion_id = $API_Connection->CHAMPION_MASTERY_V4_TOP($data['puuid'],3, $apiKey, $server);
-    $top_acc_mastery_name_1 = $API_Connection->getChampionNameById($top_champion_id[0]['championId'], $game_version);
-    $top_acc_mastery_name_2 = $API_Connection->getChampionNameById($top_champion_id[1]['championId'], $game_version);
-    $top_acc_mastery_name_3 = $API_Connection->getChampionNameById($top_champion_id[2]['championId'], $game_version);
-    $random_bg_number = $API_Connection ->getChampionSkinCount($top_acc_mastery_name_1, $game_version);
-    $match_history_IDs = $API_Connection->MATCH_V5_BY_PUUID($data['puuid'], $apiKey, $region, 20);
-    $match_details = $API_Connection->MATCH_V5_BY_ID($data['puuid'], $apiKey, $region ,$match_history_IDs[0]);
-    $random_bg = '../dragontail-' . $game_version . '/img/champion/splash/' . $top_acc_mastery_name_1 . '_' . $random_bg_number . '.jpg';
-} ?>
+
+    $region = $API_Connection->Region_Select($server);
+    $data = $API_Connection->Account_V1($region, $summoner_Nick, $tag, $apiKey);
+    if ($data)
+    {
+        $puuid = $data['puuid'];
+        $data_summoner_v4 = $API_Connection->Summoner_V4($puuid, $apiKey, $server);
+        $top_champion_ids = $API_Connection->CHAMPION_MASTERY_V4_TOP($puuid, 20, $apiKey, $server);
+
+        $top_acc_mastery_names = array_map(function($champion) use ($API_Connection, $game_version)
+        {
+            return $API_Connection->getChampionNameById($champion['championId'], $game_version);
+        }, $top_champion_ids);
+        $random_bg_number = $API_Connection->getChampionSkinCount($top_acc_mastery_names[0], $game_version);
+        $match_history_IDs = $API_Connection->MATCH_V5_BY_PUUID($puuid, $apiKey, $region, 20);
+        $match_details = $API_Connection->MATCH_V5_BY_ID($puuid, $apiKey, $region, $match_history_IDs[0]);
+
+        $random_bg = sprintf('../dragontail-%s/img/champion/splash/%s_%d.jpg',
+            $game_version,
+            $top_acc_mastery_names[0],
+            $random_bg_number
+        );
+    } else {echo "Failed to load data.";}}?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -83,10 +93,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
                 <img class='summoner-icon' src='dragontail-{$game_version}/{$game_version}/img/profileicon/{$data_summoner_v4['profileIconId']}.png' alt='summoner profile image'>
                 <div class='summoner-lvl'>{$data_summoner_v4['summonerLevel']}</div>
             </div>
-            <div class='summoner-name-container'>{$data['gameName']}#{$data['tagLine']}</div>
-            <div class='summoner-name-container'>{$top_acc_mastery_name_1}: {$top_champion_id[0]['championPoints']}</div>
-            <div class='summoner-name-container'>{$top_acc_mastery_name_2}: {$top_champion_id[1]['championPoints']}</div>
-            <div class='summoner-name-container'>{$top_acc_mastery_name_3}: {$top_champion_id[2]['championPoints']}</div>
+            <div class='summoner-info-container'>
+                <div class='summoner-name'>{$data['gameName']}#{$data['tagLine']}</div>
+                <div class='summoner-mastery' id='mastery_1'>{$top_acc_mastery_names[0]}: {$top_champion_ids[0]['championPoints']}</div>
+                <div class='summoner-mastery' id='mastery_2'>{$top_acc_mastery_names[1]}: {$top_champion_ids[1]['championPoints']}</div>
+                <div class='summoner-mastery' id='mastery_3'>{$top_acc_mastery_names[2]}: {$top_champion_ids[2]['championPoints']}</div>
+                <div class='summoner-mastery' id='mastery_4'>{$top_acc_mastery_names[3]}: {$top_champion_ids[3]['championPoints']}</div>
+        </div>
         </div>
     ";
     ?>
