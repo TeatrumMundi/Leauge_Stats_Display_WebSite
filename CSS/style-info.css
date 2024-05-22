@@ -10,7 +10,6 @@
     min-height: 100vh;
     min-width: 650px;
     padding-top: 30px;
-    background-image: linear-gradient(rgba(9, 0, 77, 0.65), rgba(9, 0, 77, 0.65)), url("../dragontail-14.10.1/img/champion/splash/Caitlyn_1.jpg");
     background-size: cover;
     background-position: center;
 }
@@ -51,10 +50,12 @@
 .summoner-name-container {
     margin-left: 10px; /* IMG distance */
     color: white;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.9);
     padding: 10px;
     border-radius: 7px;
     font-size: 28px;
+    display: inline-block;
+    white-space: nowrap;
 }
 .footer {
     position: fixed;
