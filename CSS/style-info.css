@@ -19,6 +19,7 @@
     left: 40px; /* Summoner icon and nick distance from left */
     display: flex;
     align-items: flex-start;
+    background-color: rgba(0, 0, 0, 0.5);
 }
 .summoner-icon-container /* Summoner Icon + Level Container */{
     position: relative;
@@ -70,7 +71,7 @@
     display: inline-block;
     white-space: nowrap;
     min-width: 200px;
-    width: 35vh;
+    width: 34vh;
 }
 @media (width <= 2150px) {
     #mastery_4
