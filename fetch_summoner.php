@@ -48,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
 </head>
 <body>
-<div class='container' ID="bg_box">
+<div class='main-container' ID="bg_box">
     <form id="search-form" action="fetch_summoner.php" method="POST">
         <div class="search">
             <span class="search-icon material-symbols-outlined">search</span>
@@ -88,18 +88,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     <?php
     echo
     "
-        <div class='top-right-container'>
-            <div class='summoner-icon-container'>
-                <img class='summoner-icon' src='dragontail-{$game_version}/{$game_version}/img/profileicon/{$data_summoner_v4['profileIconId']}.png' alt='summoner profile image'>
-                <div class='summoner-lvl'>{$data_summoner_v4['summonerLevel']}</div>
+        <div class='info-container'>
+            <div class='info-box'>
+                <div class='info-box-icon'>
+                    <img class='info-summoner-icon' src='dragontail-{$game_version}/{$game_version}/img/profileicon/{$data_summoner_v4['profileIconId']}.png' alt='summoner profile image'>
+                    <div class='info-summoner-lvl'>{$data_summoner_v4['summonerLevel']}</div>
+                </div>
+                <div class='info-summoner-main'>
+                    <p>{$data['gameName']}#{$data['tagLine']}</p>
+                </div>
+                <div class='info-rank-solo-duo'>
+                </div>
             </div>
-            <div class='summoner-info-container'>
-                <div class='summoner-name'>{$data['gameName']}#{$data['tagLine']}</div>
-                <div class='summoner-mastery' id='mastery_1'>{$top_acc_mastery_names[0]}: {$top_champion_ids[0]['championPoints']}</div>
-                <div class='summoner-mastery' id='mastery_2'>{$top_acc_mastery_names[1]}: {$top_champion_ids[1]['championPoints']}</div>
-                <div class='summoner-mastery' id='mastery_3'>{$top_acc_mastery_names[2]}: {$top_champion_ids[2]['championPoints']}</div>
-                <div class='summoner-mastery' id='mastery_4'>{$top_acc_mastery_names[3]}: {$top_champion_ids[3]['championPoints']}</div>
-        </div>
+            <div class='info-box'>
+        
+            </div>
         </div>
     ";
     ?>
